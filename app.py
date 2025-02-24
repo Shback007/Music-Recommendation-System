@@ -2,6 +2,8 @@ import pickle
 import streamlit as st
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # 🔹 Spotify API Credentials
 CLIENT_ID = "533d956b570c4be0b08624456027a566"
@@ -14,7 +16,9 @@ sp = spotipy.Spotify(client_credentials_manager=client_Credentials_Manager)
 # 🔹 Load Pickle Files
 try:
     music = pickle.load(open('df.pkl', 'rb'))
-    similarity = pickle.load(open('similarity.pkl', 'rb'))
+    tfid = TfidfVectorizer(analyzer='word', stop_words='english')
+    matrix = tfid.fit_transform(music['text'])
+    similarity = cosine_similarity(matrix)
 except FileNotFoundError:
     st.error("Missing 'df.pkl' or 'similarity.pkl'. Please check your files.")
     st.stop()
