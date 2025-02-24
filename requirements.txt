@@ -1,0 +1,7 @@
+streamlit
+spotipy
+pickle-mixin
+pandas
+numpy
+requests
+urllib3
