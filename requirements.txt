@@ -1,7 +1,9 @@
 streamlit
-spotipy
 pickle-mixin
 pandas
 numpy
 requests
 urllib3
+spotipy==2.25.0  
+scikit-learn==1.4.0  
+
